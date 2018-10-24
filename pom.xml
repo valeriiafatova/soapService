@@ -24,6 +24,46 @@
 
   <build>
     <finalName>soapService</finalName>
-
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <port>8080</port>
+          <path>/</path>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <id>xjc</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <packageName>com.epam.soapService.model</packageName>
+          <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+          <sources>
+            <source>${project.basedir}/src/main/resources/xsd</source>
+          </sources>
+          <generateEpisode>false</generateEpisode>
+          <clearOutputDir>false</clearOutputDir>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
